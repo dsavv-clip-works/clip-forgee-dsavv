@@ -1,0 +1,17 @@
+[build]
+  command = "npx prisma generate && next build"
+  publish = ".next"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["ffmpeg-static"]
+  included_files = ["node_modules/ffmpeg-static/**"]
+
+[functions.process-job-background]
+  background = true
+  timeout = 900
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-store"
